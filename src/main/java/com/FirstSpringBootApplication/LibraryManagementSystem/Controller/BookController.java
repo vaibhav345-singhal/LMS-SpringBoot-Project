@@ -1,9 +1,13 @@
 package com.FirstSpringBootApplication.LibraryManagementSystem.Controller;
 
+import com.FirstSpringBootApplication.LibraryManagementSystem.DTO.AddBookRequestDto;
+import com.FirstSpringBootApplication.LibraryManagementSystem.DTO.AddBookResponseDto;
 import com.FirstSpringBootApplication.LibraryManagementSystem.Entity.Author;
 import com.FirstSpringBootApplication.LibraryManagementSystem.Entity.Book;
 import com.FirstSpringBootApplication.LibraryManagementSystem.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,17 +20,18 @@ public class BookController {
     BookService bookService;
 
     @PostMapping("/add")
-    public String addBook(@RequestBody Book book) {
+    public ResponseEntity addBook(@RequestBody AddBookRequestDto addBookRequestDto) {
+        AddBookResponseDto addBookResponseDto;
         try {
-            bookService.addBook(book);
+            addBookResponseDto = bookService.addBook(addBookRequestDto);
         } catch (Exception e) {
-            return e.getMessage();
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
         }
-        return "Book Added";
+        return new ResponseEntity(addBookResponseDto, HttpStatus.OK);
     }
 
     @GetMapping("/get")
-    public List<Book> getBook(){
+    public List<Book> getBook() {
         return bookService.getBook();
     }
 }

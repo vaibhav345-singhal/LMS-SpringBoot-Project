@@ -29,6 +29,6 @@ public class Book {
 
     @ManyToOne
     @JoinColumn
-    @JsonIgnore // to remove null pointer exception because we will encounter it
+    //@JsonIgnore // to remove null pointer exception because we will encounter it
     Author author;
 }

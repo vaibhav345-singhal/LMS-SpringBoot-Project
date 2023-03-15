@@ -1,12 +1,15 @@
 package com.FirstSpringBootApplication.LibraryManagementSystem.Entity;
 
 import com.FirstSpringBootApplication.LibraryManagementSystem.Enum.Status;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
@@ -22,8 +25,11 @@ public class LibraryCard {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    private String validTill;
+    @CreationTimestamp
+    private Date createdDate;
+
     @OneToOne
     @JoinColumn
+     @JsonIgnore
     Student student;
 }

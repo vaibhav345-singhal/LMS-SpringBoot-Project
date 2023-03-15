@@ -4,4 +4,6 @@ import com.FirstSpringBootApplication.LibraryManagementSystem.Entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StudentRepo extends JpaRepository<Student, Integer> {
+
+    public Student findByEmail(String email);
 }

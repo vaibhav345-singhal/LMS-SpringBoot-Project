@@ -1,5 +1,7 @@
 package com.FirstSpringBootApplication.LibraryManagementSystem.Controller;
 
+import com.FirstSpringBootApplication.LibraryManagementSystem.DTO.AuthorRequestDto;
+import com.FirstSpringBootApplication.LibraryManagementSystem.DTO.AuthorResponseDto;
 import com.FirstSpringBootApplication.LibraryManagementSystem.Entity.Author;
 import com.FirstSpringBootApplication.LibraryManagementSystem.Service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ public class AuthorController {
     AuthorService authorService;
 
     @PostMapping("/add")
-    public String addAuthor(@RequestBody Author author) {
-        return authorService.addAuthor(author);
+    public AuthorResponseDto addAuthor(@RequestBody AuthorRequestDto authorRequestDto) {
+        return authorService.addAuthor(authorRequestDto);
     }
 }

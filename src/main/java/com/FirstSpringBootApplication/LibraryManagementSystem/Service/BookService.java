@@ -1,7 +1,10 @@
 package com.FirstSpringBootApplication.LibraryManagementSystem.Service;
 
+import com.FirstSpringBootApplication.LibraryManagementSystem.DTO.AddBookRequestDto;
+import com.FirstSpringBootApplication.LibraryManagementSystem.DTO.AddBookResponseDto;
 import com.FirstSpringBootApplication.LibraryManagementSystem.Entity.Author;
 import com.FirstSpringBootApplication.LibraryManagementSystem.Entity.Book;
+import com.FirstSpringBootApplication.LibraryManagementSystem.Exception.AuthorNotFound;
 import com.FirstSpringBootApplication.LibraryManagementSystem.Repository.AuthorRepo;
 import com.FirstSpringBootApplication.LibraryManagementSystem.Repository.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +21,27 @@ public class BookService {
     @Autowired
     AuthorRepo authorRepo;
 
-    public String addBook(Book book) {
-        Author author;
+    public AddBookResponseDto addBook(AddBookRequestDto addBookRequestDto) throws AuthorNotFound {
 
+        Author author;
         try {
-            author = authorRepo.findById(book.getAuthor().getId()).get(); // to check if its present or not
+            author = authorRepo.findById(addBookRequestDto.getAuthorId()).get();
         } catch (Exception e) {
-            return e.getMessage();
+            throw new AuthorNotFound("Author Not Found");
         }
 
-        List<Book> bookWritten = author.getBook();
-        bookWritten.add(book);
+        Book book = new Book();
+        book.setGenre(addBookRequestDto.getGenre());
+        book.setPrice(addBookRequestDto.getPrice());
+        book.setTitle(addBookRequestDto.getTitle());
+        book.setAuthor(author);
+
+        author.getBook().add(book);
 
         authorRepo.save(author);
-        return "Book Added";
+
+        AddBookResponseDto addBookResponseDto = new AddBookResponseDto(book.getTitle(), book.getPrice(), book.getGenre());
+        return addBookResponseDto;
     }
 
     public List<Book> getBook() {
