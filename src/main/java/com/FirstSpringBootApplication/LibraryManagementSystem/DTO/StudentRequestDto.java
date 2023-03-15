@@ -15,7 +15,6 @@ import java.util.Date;
 @Getter
 @Setter
 public class StudentRequestDto {
-    private int id;
     private String name;
     private Date dob;
     private String address;

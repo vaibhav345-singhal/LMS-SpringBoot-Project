@@ -9,7 +9,9 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -30,6 +32,11 @@ public class LibraryCard {
 
     @OneToOne
     @JoinColumn
-     @JsonIgnore
     Student student;
+
+    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
+    List<Book> bookList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
+    List<Transection> transectionList = new ArrayList<>();
 }
