@@ -1,6 +1,6 @@
 package com.FirstSpringBootApplication.LibraryManagementSystem.Enum;
 
-public enum TransectionStatus {
-    SUCCESS,
-    FAILED
+public enum TransactionType {
+    ISSUE,
+    RETURN
 }

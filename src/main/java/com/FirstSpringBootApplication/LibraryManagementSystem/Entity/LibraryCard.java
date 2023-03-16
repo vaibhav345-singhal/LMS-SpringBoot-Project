@@ -1,7 +1,6 @@
 package com.FirstSpringBootApplication.LibraryManagementSystem.Entity;
 
 import com.FirstSpringBootApplication.LibraryManagementSystem.Enum.Status;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,5 +37,5 @@ public class LibraryCard {
     List<Book> bookList = new ArrayList<>();
 
     @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
-    List<Transection> transectionList = new ArrayList<>();
+    List<Transaction> transactionList = new ArrayList<>();
 }

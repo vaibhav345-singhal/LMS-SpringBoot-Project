@@ -1,7 +1,7 @@
 package com.FirstSpringBootApplication.LibraryManagementSystem.Entity;
 
-import com.FirstSpringBootApplication.LibraryManagementSystem.Enum.TransectionStatus;
-import com.FirstSpringBootApplication.LibraryManagementSystem.Enum.TransectionType;
+import com.FirstSpringBootApplication.LibraryManagementSystem.Enum.TransactionStatus;
+import com.FirstSpringBootApplication.LibraryManagementSystem.Enum.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,20 +14,20 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Transection {
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String transectionNumber;
+    private String transactionNumber;
 
     @Enumerated(EnumType.STRING)
-    private TransectionStatus transectionStatus;
+    private TransactionStatus transactionStatus;
 
-    private String transectionMessage;
+    private String transactionMessage;
 
     @Enumerated(EnumType.STRING)
-    private TransectionType transectionType;
+    private TransactionType transactionType;
 
     @ManyToOne
     @JoinColumn
